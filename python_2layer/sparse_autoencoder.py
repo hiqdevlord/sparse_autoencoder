@@ -1,3 +1,11 @@
+# Instruction
+# -----------
+# This file implements Back-propagation algorithm, and adds weight decay and
+# sparsity penalty, which are controlled by lamb and (beta, sparsity_param).
+#
+# ==========================================================================
+
+
 import numpy as np
 
 
@@ -50,12 +58,6 @@ def compute_cost(theta, *args):
     # Initialize network layers
     z = dict()  # keys are from 2 to number of layers
     a = dict()  # keys are from 1 to number of layers
-
-    # Get parameters from theta of dict version
-    #W1 = theta.get("weight")[0]
-    #W2 = theta.get("weight")[1]
-    #b1 = theta.get("weight")[0]
-    #b2 = theta.get("weight")[1]
 
     # Get parameters from theta of vector version
     W1 = theta[: hidden_size * visible_size].reshape(hidden_size, visible_size)
@@ -115,12 +117,6 @@ def compute_grad(theta, *args):
     if len(args) > 5:
         beta = args[5]
 
-    # Get parameters from theta
-    #W1 = theta.get("weight")[0]
-    #W2 = theta.get("weight")[1]
-    #b1 = theta.get("weight")[0]
-    #b2 = theta.get("weight")[1]
-
     # Get parameters from theta of vector version
     W1 = theta[: hidden_size * visible_size].reshape(hidden_size, visible_size)
     W2 = theta[hidden_size * visible_size: 2 * hidden_size * visible_size].\
@@ -151,6 +147,7 @@ def compute_grad(theta, *args):
     # rho is the average activation of hidden layer units
     rho = np.zeros(b1.shape)
     sparsity_mat = np.ones(b1.shape) * sparsity_param
+
     # paralization, to be updated
     for i in range(data.shape[1]):
         a[1] = data[:, i].reshape(visible_size, 1)
@@ -162,6 +159,9 @@ def compute_grad(theta, *args):
     # Backpropogation
     # paralization, to be updated
     for i in range(data.shape[1]):
+        a[1] = data[:, i].reshape(visible_size, 1)
+        z[2] = np.dot(W1,  a[1]) + b1
+        a[2] = sigmoid(z[2])
         z[3] = np.dot(W2, a[2]) + b2
         a[3] = sigmoid(z[3])
         sigma[3] = -(a[1] - a[3]) * (a[3] * (1 - a[3]))
