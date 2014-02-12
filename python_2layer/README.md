@@ -7,6 +7,7 @@ Introduction
 -------------------------------------------
   Sparse Autoencoder is a great Machine Learning tool in this Deep Learning trend. It is proved that this unsupervised tool can be exploited to build far better features than tradictional approaches, like HOGs, LBPs in vision background or MFCC in speech community.           
   To get more infomation on Sparse Autoencoder, please visit:        
+  [Deep Learning reading list](http://deeplearning.net/reading-list/)
 
 As a start
 -------------------------------------------
