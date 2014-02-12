@@ -6,7 +6,8 @@ Sparse Autoencoder
 Introduction         
 -------------------------------------------
   Sparse Autoencoder is a great Machine Learning tool in this Deep Learning trend. It is proved that this unsupervised tool can be exploited to build far better features than tradictional approaches, like HOGs, LBPs in vision background or MFCC in speech community.           
-  To get more infomation on Sparse Autoencoder, please visit:        
+  To get more infomation on Sparse Autoencoder, please visit:       
+  [Deep Learning reading list](http://deeplearning.net/reading-list/)
 
 Multi-layer
 -------------------------------------------
@@ -18,8 +19,8 @@ Usage
   You can simply have a view at train.py, which will show you how to train a Sparse Autoencoder. Importantly, the data matrix should be arranged column-by-column and the size of all layers (visible layers and hidden layers) should be given before training.
 
 ### Parameters of training
-  lamb: controls the weight decay.
-  beta and sparsityparam: control sparsity penalty
+  **lamb**: controls the weight decay.        
+  **beta and sparsity_param**: control sparsity penalty
 
 ### scipy and numpy (if not follow my top module script, train.py)
     import numpy as np
@@ -32,3 +33,4 @@ Usage
 ### Platform
   python 2.7.5, numpy 1.6.1 and scipy 0.13.3 on Ubuntu 12.04 LTS.
     
+
