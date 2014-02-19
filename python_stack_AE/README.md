@@ -19,9 +19,9 @@ Visualization
   We visualize the effect of stacked AE layer-by-layer. Examples are showed in the following, and these images are located in visualization/examples. These three images can help you to understand what it has learned. We obtain them layer-by-layer, applying **Lagrange Multiplier** after imposing a norm constrain. We can find the features that can maximally activate the hidden units and thus, these features are what hidden layers look for.
   
   The three images:
-  ![layer 1](https://github.com/zhaojunbo/sparse_autoencoder/tree/master/python_stack_AE/visualization/examples/1.jpg "layer 1" )
-  ![layer 2](https://github.com/zhaojunbo/sparse_autoencoder/tree/master/python_stack_AE/visualization/examples/2.jpg "layer 2")
-  ![layer 3](https://github.com/zhaojunbo/sparse_autoencoder/tree/master/python_stack_AE/visualization/examples/3.jpg "layer 3")
+  ![layer 1](https://github.com/zhaojunbo/sparse_autoencoder/tree/raw/python_stack_AE/visualization/examples/1.jpg)
+  ![layer 2](https://github.com/zhaojunbo/sparse_autoencoder/tree/raw/python_stack_AE/visualization/examples/2.jpg)
+  ![layer 3](https://github.com/zhaojunbo/sparse_autoencoder/tree/raw/python_stack_AE/visualization/examples/3.jpg)
 
   Accordingly, we can find that Stacked AE could capture some useful features. The first layer tends to learn edges in an input images, and the second layer seems aim at a second-order features, in terms of what edges tend to occur together. The higher layers of the Stacked AE tend to learn higher-order features.
 
