@@ -61,20 +61,34 @@ def normalize_data(data):
 
 # visualize the effect of networks
 def display_effect(W):
-    img_num, unit_num = W.shape
-    assert(issquare(img_num) and issquare(unit_num))  # QA
+    img_num, pixel_num = W.shape
+    assert issquare(pixel_num)  # QA
 
     # Find out the input pixels that maximally activate hidden units
-    x = np.zeros(shape=(img_num, unit_num))
+    x = np.zeros(shape=(img_num, pixel_num))
     for i in range(img_num):
         # See 'VIsualization' chapter
         max_act = W[i, :] / np.linalg.norm(W[i, :])
         x[i, :] = max_act.squeeze()
 
+    # Adjust img_num
+    max_img_num = 100
+    img_num = img_num if img_num < max_img_num else max_img_num
+    perfect_square = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+    if not issquare(img_num):
+        perfect_square.append(img_num)
+        perfect_square.sort()
+        img_num = perfect_square[perfect_square.index(img_num) - 1]
+
+    # Adjust X with adjusted img_num
+    adj_x_ind = np.random.permutation(x.shape[0])
+    adj_x_ind = adj_x_ind[:img_num]
+    x = x[adj_x_ind, :]
+
     # Visualize the effect in a big image grid, in which each small block
     # matches the feature each considered hidden unit looks for.
     num = int(np.sqrt(img_num))
-    unit_shape = int(np.sqrt(unit_num))
+    unit_shape = int(np.sqrt(pixel_num))
     visualgrid = np.zeros(shape=(num * (unit_shape + 2) - 2,
                                  num * (unit_shape + 2) - 2))
     # Constructing the image grids
