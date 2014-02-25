@@ -30,7 +30,6 @@ def main():
     # Initialize networks
     visible_size = 64  # number of input units
     hidden_size = [25, 16, 9]  # number of hidden units of each layer
-    sparsity_param = 0.01   # desired average activation
 
     lamb = 0.0001     # weight decay parameter
     beta = 3    # weight of sparsity penalty dataset
@@ -46,6 +45,12 @@ def main():
     layer_ind.remove(0)
     layer_size = [visible_size] + hidden_size
 
+    # desired average activation
+    sparsity_param = dict()
+    for ind in layer_ind:
+        # standard: 64 units -> sparsity parameter 0.01
+        sparsity_param[ind] = layer_size[ind - 1] * 0.01 / 64
+
     data = data_train
     opttheta = dict()  # parameter vector of stack AE
     img = dict()  # visualization mode
@@ -59,7 +64,7 @@ def main():
 
         # Training begins
         options = (data, layer_size[ind - 1], layer_size[ind],
-                   lamb, sparsity_param, beta)
+                   lamb, sparsity_param[ind], beta)
 
         opt = optimize.fmin_l_bfgs_b(compute_cost, theta,
                                      compute_grad, options)

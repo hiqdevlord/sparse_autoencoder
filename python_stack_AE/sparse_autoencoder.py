@@ -88,12 +88,6 @@ def compute_cost(theta, *args):
     z = dict()  # keys are from 2 to number of layers
     a = dict()  # keys are from 1 to number of layers
 
-    # Get parameters from theta of dict version
-    #W1 = theta.get("weight")[0]
-    #W2 = theta.get("weight")[1]
-    #b1 = theta.get("weight")[0]
-    #b2 = theta.get("weight")[1]
-
     # Get parameters from theta of vector version
     W1 = theta[: hidden_size * visible_size].reshape(hidden_size, visible_size)
     W2 = theta[hidden_size * visible_size: 2 * hidden_size * visible_size].\
@@ -118,7 +112,7 @@ def compute_cost(theta, *args):
         z[3] = np.dot(W2, a[2]) + b2
         a[3] = sigmoid(z[3])
 
-        cost += sum(np.power(a[3] - a[1], 2)) / 2
+        cost += np.sum(np.power(a[3] - a[1], 2)) / 2
 
     # Out of loop
     rho /= data.shape[1]
