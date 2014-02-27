@@ -7,7 +7,7 @@ Introduction
 ------------------------
   Sparse Autoencoders can be stacked in a greedy layerwise fashion for pretraining usage. For instance, MFCC is a well-known feature design in speech community during and its great power lasted for nearly 30 years. However, MFCC is not optimal in another audio community, MIR (Music Information Retrieval). Thus, we need Stacked AE to help us design a new feature automatically.
   To get more information, please visit:
-  [UFLDL Tutorial][http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders]
+  [UFLDL Tutorial](http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders)
 
 "Stacked"
 -----------------------
