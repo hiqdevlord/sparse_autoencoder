@@ -101,7 +101,6 @@ def compute_cost(theta, *args):
 
     # rho is the average activation of hidden layer units
     rho = np.zeros(b1.shape)
-    sparsity_mat = np.ones(b1.shape) * sparsity_param
 
     # paralization, to be updated
     for i in range(data.shape[1]):
@@ -116,13 +115,13 @@ def compute_cost(theta, *args):
 
     # Out of loop
     rho /= data.shape[1]
-    sparse_kl = sparsity_param * np.log(sparsity_mat / rho) +\
-        (1 - sparsity_param) * np.log((1 - sparsity_mat) / (1 - rho))
+    sparse_kl = sparsity_param * np.log(sparsity_param / rho) +\
+        (1 - sparsity_param) * np.log((1 - sparsity_param) / (1 - rho))
 
     '''
     try:
-        sparse_kl = sparsity_param * np.log(sparsity_mat / rho) +\
-            (1 - sparsity_param) * np.log((1 - sparsity_mat) / (1 - rho))
+        sparse_kl = sparsity_param * np.log(sparsity_param / rho) +\
+            (1 - sparsity_param) * np.log((1 - sparsity_param) / (1 - rho))
     except RuntimeWarning:
         print rho
         input()
@@ -184,7 +183,6 @@ def compute_grad(theta, *args):
     # Sparsity pre-feedforward process, to get rho
     # rho is the average activation of hidden layer units
     rho = np.zeros(b1.shape)
-    sparsity_mat = np.ones(b1.shape) * sparsity_param
     # paralization, to be updated
     for i in range(data.shape[1]):
         a[1] = data[:, i].reshape(visible_size, 1)
@@ -202,7 +200,7 @@ def compute_grad(theta, *args):
         z[3] = np.dot(W2, a[2]) + b2
         a[3] = sigmoid(z[3])
         sigma[3] = -(a[1] - a[3]) * (a[3] * (1 - a[3]))
-        sparsity_sigma = -sparsity_mat / rho + (1 - sparsity_mat) / (1 - rho)
+        sparsity_sigma = -sparsity_param / rho + (1 - sparsity_param) / (1 - rho)
         sigma[2] = (np.dot(W2.T, sigma[3]) + beta * sparsity_sigma) *\
                    (a[2] * (1 - a[2]))
 
